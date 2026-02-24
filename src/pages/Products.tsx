@@ -4,6 +4,7 @@ import { SlidersHorizontal } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import ProductCard from "@/components/ProductCard";
 import Footer from "@/components/Footer";
+import { ProductFeedback } from "@/components/ProductFeedback";
 import {
   PRODUCTS,
   SKIN_CONCERNS,
@@ -94,11 +95,10 @@ const Products = () => {
                   <button
                     key={type.id}
                     onClick={() => setSelectedSkinType(selectedSkinType === type.id ? undefined : type.id)}
-                    className={`block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
-                      selectedSkinType === type.id
+                    className={`block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${selectedSkinType === type.id
                         ? "bg-primary text-primary-foreground font-medium"
                         : "text-foreground hover:bg-muted"
-                    }`}
+                      }`}
                   >
                     {type.label}
                   </button>
@@ -114,11 +114,10 @@ const Products = () => {
                   <button
                     key={opt.id}
                     onClick={() => setSelectedBudget(selectedBudget === opt.id ? undefined : opt.id)}
-                    className={`block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
-                      selectedBudget === opt.id
+                    className={`block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${selectedBudget === opt.id
                         ? "bg-primary text-primary-foreground font-medium"
                         : "text-foreground hover:bg-muted"
-                    }`}
+                      }`}
                   >
                     {opt.range}
                   </button>
@@ -134,11 +133,10 @@ const Products = () => {
                   <button
                     key={concern.id}
                     onClick={() => toggleConcern(concern.id)}
-                    className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
-                      selectedConcerns.includes(concern.id)
+                    className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${selectedConcerns.includes(concern.id)
                         ? "gradient-warm text-primary-foreground"
                         : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                    }`}
+                      }`}
                   >
                     {concern.icon} {concern.label}
                   </button>
@@ -147,8 +145,8 @@ const Products = () => {
             </div>
           </aside>
 
-          {/* Product Grid */}
-          <div className="flex-1">
+          {/* Product Grid and Feedback */}
+          <div className="flex-1 space-y-16">
             {filteredProducts.length > 0 ? (
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredProducts.map((product) => (
@@ -170,6 +168,14 @@ const Products = () => {
                 >
                   Clear Filters
                 </button>
+              </div>
+            )}
+
+            {filteredProducts.length > 0 && (
+              <div className="pt-10 border-t border-border">
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">Community Feedback</h2>
+                <p className="text-muted-foreground mb-8">Hear from others who used these curated treatments.</p>
+                <ProductFeedback productId="all" />
               </div>
             )}
           </div>
