@@ -42,6 +42,13 @@ const Navbar = () => {
           >
             Products
           </Link>
+          <Link
+            to="/admin"
+            className={`text-sm font-medium transition-colors hover:text-primary ${location.pathname === "/admin" ? "text-primary" : "text-muted-foreground"
+              }`}
+          >
+            Admin
+          </Link>
         </div>
 
         <div className="flex items-center gap-4">

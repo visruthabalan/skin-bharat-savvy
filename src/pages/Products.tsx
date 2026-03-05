@@ -10,6 +10,7 @@ import {
   SKIN_CONCERNS,
   BUDGET_OPTIONS,
   filterProducts,
+  getAllProducts,
   SkinConcern,
   BudgetRange,
   SkinType,
@@ -41,7 +42,7 @@ const Products = () => {
   };
 
   const filteredProducts = useMemo(
-    () => filterProducts(PRODUCTS, selectedConcerns, selectedBudget, selectedSkinType),
+    () => filterProducts(getAllProducts(), selectedConcerns, selectedBudget, selectedSkinType),
     [selectedConcerns, selectedBudget, selectedSkinType]
   );
 
@@ -96,8 +97,8 @@ const Products = () => {
                     key={type.id}
                     onClick={() => setSelectedSkinType(selectedSkinType === type.id ? undefined : type.id)}
                     className={`block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${selectedSkinType === type.id
-                        ? "bg-primary text-primary-foreground font-medium"
-                        : "text-foreground hover:bg-muted"
+                      ? "bg-primary text-primary-foreground font-medium"
+                      : "text-foreground hover:bg-muted"
                       }`}
                   >
                     {type.label}
@@ -115,8 +116,8 @@ const Products = () => {
                     key={opt.id}
                     onClick={() => setSelectedBudget(selectedBudget === opt.id ? undefined : opt.id)}
                     className={`block w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${selectedBudget === opt.id
-                        ? "bg-primary text-primary-foreground font-medium"
-                        : "text-foreground hover:bg-muted"
+                      ? "bg-primary text-primary-foreground font-medium"
+                      : "text-foreground hover:bg-muted"
                       }`}
                   >
                     {opt.range}
@@ -134,8 +135,8 @@ const Products = () => {
                     key={concern.id}
                     onClick={() => toggleConcern(concern.id)}
                     className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${selectedConcerns.includes(concern.id)
-                        ? "gradient-warm text-primary-foreground"
-                        : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                      ? "gradient-warm text-primary-foreground"
+                      : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                       }`}
                   >
                     {concern.icon} {concern.label}

@@ -1,4 +1,4 @@
-export type SkinConcern = 
+export type SkinConcern =
   | "acne"
   | "pigmentation"
   | "tanning"
@@ -15,6 +15,7 @@ export type SkinType = "oily" | "dry" | "combination" | "sensitive" | "normal";
 export type BudgetRange = "under-300" | "300-600" | "600-1000" | "above-1000";
 
 export type Climate = "hot-humid" | "hot-dry" | "moderate" | "cold";
+export type Gender = "male" | "female" | "other" | "unspecified";
 
 export interface Product {
   id: string;
@@ -31,6 +32,7 @@ export interface Product {
 }
 
 export interface QuizAnswers {
+  gender?: Gender;
   skinType?: SkinType;
   concerns: SkinConcern[];
   budget?: BudgetRange;
@@ -175,6 +177,33 @@ export const PRODUCTS: Product[] = [
     description: "Affordable de-tanning pack for Indian climate conditions.",
   },
 ];
+
+const LOCAL_STORAGE_KEY = "skincare_local_products";
+
+export function getLocalProducts(): Product[] {
+  const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+  return stored ? JSON.parse(stored) : [];
+}
+
+export function saveLocalProduct(product: Product) {
+  const products = getLocalProducts();
+  products.push(product);
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(products));
+}
+
+export function deleteLocalProduct(id: string) {
+  const products = getLocalProducts();
+  const filtered = products.filter(p => p.id !== id);
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(filtered));
+}
+
+export function getAllProducts(): Product[] {
+  // Only use window.localStorage if we are in a browser environment
+  if (typeof window !== "undefined") {
+    return [...PRODUCTS, ...getLocalProducts()];
+  }
+  return PRODUCTS;
+}
 
 export const BUDGET_OPTIONS: { id: BudgetRange; label: string; range: string }[] = [
   { id: "under-300", label: "Budget Friendly", range: "Under ₹300" },

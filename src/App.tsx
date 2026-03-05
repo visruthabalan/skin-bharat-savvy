@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import SkinQuiz from "./pages/SkinQuiz";
 import Products from "./pages/Products";
 import Login from "./pages/Login";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 import { CartProvider } from "./hooks/useCart";
@@ -25,6 +26,7 @@ const App = () => (
             <Route path="/home" element={<Index />} />
             <Route path="/quiz" element={<SkinQuiz />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/admin" element={<Admin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
